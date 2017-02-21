@@ -1,1 +1,1 @@
-web: gunicorn app_with_hander:app --log-file -
+web: gunicorn app_with_handler.py: --log-file -
