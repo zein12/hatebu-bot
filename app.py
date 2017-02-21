@@ -21,7 +21,7 @@ from argparse import ArgumentParser
 
 from flask import Flask, request, abort
 from linebot import (
-    LineBotApi, WebhookParser
+    LineBotApi, WebhookParser, WebhookHandler
 )
 from linebot.exceptions import (
     InvalidSignatureError
@@ -44,6 +44,7 @@ if channel_access_token is None:
     sys.exit(1)
 
 line_bot_api = LineBotApi(channel_access_token)
+handler = WebhookHandler(channel_secret)
 parser = WebhookParser(channel_secret)
 
 
@@ -89,8 +90,8 @@ def handle_text_message(event):
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     else:
-    line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text=event.message.text))
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=event.message.text))
 
 if __name__ == "__main__":
     arg_parser = ArgumentParser(
