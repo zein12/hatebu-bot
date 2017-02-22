@@ -83,14 +83,16 @@ def handle_text_message(event):
     text = event.message.text
     if text == "all":
         rss = feedparser.parse("http://b.hatena.ne.jp/hotentry?mode=rss&of=5")
-        template_message = TemplateSendMessage(
-            alt_text='Buttons alt text', template=generate_carousel(rss))
+        template_message = generate_carousel(rss)
+        carousel_template = TemplateSendMessage(
+            alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text in ["social", "economics", "life", "knowledge",
                   "it", "fun", "entertainment", "game"]:
         rss = feedparser.parse(f"http://b.hatena.ne.jp/hotentry/{text}.rss")
+        template_message = generate_carousel(rss)
         template_message = TemplateSendMessage(
-            alt_text='Buttons alt text', template=generate_carousel(rss))
+            alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     else:
         line_bot_api.reply_message(
@@ -99,7 +101,6 @@ def handle_text_message(event):
 
 def generate_carousel(rss):
     print("generate_carousel called")
-    print(rss)
     carousel_template = CarouselTemplate(columns=[
         CarouselColumn(text=rss.entries[0].link,
                        title=rss.entries[0].title,
@@ -122,7 +123,6 @@ def generate_carousel(rss):
                        actions=[URITemplateAction(label='Go to this page',
                                                   uri=rss.entries[4].link)]),
         ])
-    print(carousel_template)
     return carousel_template
 
 
