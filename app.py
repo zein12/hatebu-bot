@@ -84,17 +84,20 @@ def handle_text_message(event):
     if text == "all":
         rss = feedparser.parse("http://b.hatena.ne.jp/hotentry?mode=rss&of=5")
         carousel_template = CarouselTemplate(columns=[
-            CarouselColumn(text='rss.entries[0].title', title='rss.entries[0].link', actions=[
-                URITemplateAction(label='Go to this page',
-                                  uri='rss.entries[0].link')]),
-            CarouselColumn(text='rss.entries[1].title', title='rss.entries[1].link', actions=[
-                URITemplateAction(label='Go to this page',
-                                  uri='rss.entries[1].link')]),
+            CarouselColumn(text=rss.entries[0].title,
+                           title=rss.entries[0].link,
+                           actions=[URITemplateAction(label='Go to this page',
+                                                      uri=rss.entries[0].link)]),
+            CarouselColumn(text=rss.entries[1].title,
+                           title=rss.entries[1].link,
+                           actions=[URITemplateAction(label='Go to this page',
+                                                      uri=rss.entries[1].link)]),
         ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-    elif text in ["social", "economics", "life", "knowledge", "it", "fun", "entertainment", "game"]:
+    elif text in ["social", "economics", "life", "knowledge",
+                  "it", "fun", "entertainment", "game"]:
         pass
     else:
         line_bot_api.reply_message(
