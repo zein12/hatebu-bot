@@ -81,24 +81,25 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-
-    if text == "menu":
-        buttons_template = ButtonsTemplate(
-            title='My buttons sample', text='Hello, my buttons', actions=[
-                URITemplateAction(
-                    label='Go to line.me', uri='https://line.me'),
-                PostbackTemplateAction(label='ping', data='ping'),
-                PostbackTemplateAction(
-                    label='ping with text', data='ping',
-                    text='ping'),
-                MessageTemplateAction(label='Translate Rice', text='米')
-            ])
+    if text == "all":
+        rss = feedparser.parse("http://b.hatena.ne.jp/hotentry?mode=rss&of=5")
+        carousel_template = CarouselTemplate(columns=[
+            CarouselColumn(text='rss.entries[0].title', title='rss.entries[0].link', actions=[
+                URITemplateAction(label='Go to this page',
+                                  uri='rss.entries[0].link')]),
+            CarouselColumn(text='rss.entries[1].title', title='rss.entries[1].link', actions=[
+                URITemplateAction(label='Go to this page',
+                                  uri='rss.entries[1].link')]),
+        ])
         template_message = TemplateSendMessage(
-            alt_text='Buttons alt text', template=buttons_template)
+            alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
+    elif text in ["social", "economics", "life", "knowledge", "it", "fun", "entertainment", "game"]:
+        pass
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
+
 
 if __name__ == "__main__":
     arg_parser = ArgumentParser(
