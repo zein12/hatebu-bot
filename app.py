@@ -17,6 +17,7 @@ from __future__ import unicode_literals
 import os
 import sys
 import feedparser
+from urllib.parse import quote
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -97,6 +98,7 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
 
     else:
+        text = quote(text)
         url = f"http://b.hatena.ne.jp/search/tag?q={text}&mode=rss"
         carousel_template = make_carousel(url)
         template_message = TemplateSendMessage(
