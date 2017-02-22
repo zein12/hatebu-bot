@@ -82,22 +82,8 @@ def callback():
 def handle_text_message(event):
     text = event.message.text
     if text == "all":
-        rss = feedparser.parse("http://b.hatena.ne.jp/hotentry?mode=rss&of=5")
-        carousel_template = CarouselTemplate(columns=[
-            CarouselColumn(text=rss.entries[0].title,
-                           title=rss.entries[0].link,
-                           actions=[URITemplateAction(label='Go to this page',
-                                                      uri=rss.entries[0].link)]),
-            CarouselColumn(text=rss.entries[1].title,
-                           title=rss.entries[1].link,
-                           actions=[URITemplateAction(label='Go to this page',
-                                                      uri=rss.entries[1].link)]),
-            CarouselColumn(text=rss.entries[1].title,
-                           title=rss.entries[1].link,
-                           actions=[URITemplateAction(label='Go to this page',
-                                                      uri=rss.entries[1].link)]),
-
-        ])
+        url = "http://b.hatena.ne.jp/hotentry?mode=rss"
+        carousel_template = make_carousel(url)
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
@@ -109,6 +95,33 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
 
+
+def make_carousel(url):
+    rss = feedparser.parse(url)
+    carousel_template = CarouselTemplate(columns=[
+        CarouselColumn(text=rss.entries[0].summary[:60],
+                       title=rss.entries[0].title[40],
+                       actions=[URITemplateAction(label='Go to this page',
+                                                  uri=rss.entries[0].link)]),
+        CarouselColumn(text=rss.entries[1].summary[:60],
+                       title=rss.entries[1].title[:40],
+                       actions=[URITemplateAction(label='Go to this page',
+                                                  uri=rss.entries[1].link)]),
+        CarouselColumn(text=rss.entries[2].summary[:60],
+                       title=rss.entries[2].title[:40],
+                       actions=[URITemplateAction(label='Go to this page',
+                                                  uri=rss.entries[2].link)]),
+        CarouselColumn(text=rss.entries[3].summary[:60],
+                       title=rss.entries[3].title[:40],
+                       actions=[URITemplateAction(label='Go to this page',
+                                                  uri=rss.entries[3].link)]),
+        CarouselColumn(text=rss.entries[4].summary[:60],
+                       title=rss.entries[4].title[:40],
+                       actions=[URITemplateAction(label='Go to this page',
+                                                  uri=rss.entries[4].link)]),
+
+    ])
+    return carousel_template
 
 
 if __name__ == "__main__":
