@@ -83,14 +83,14 @@ def handle_text_message(event):
     text = event.message.text
     if text == "all":
         rss = feedparser.parse("http://b.hatena.ne.jp/hotentry?mode=rss&of=5")
-        template_message = generate_carousel(rss)
-        carousel_template = TemplateSendMessage(
+        carousel_template = generate_carousel(rss)
+        template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text in ["social", "economics", "life", "knowledge",
                   "it", "fun", "entertainment", "game"]:
         rss = feedparser.parse(f"http://b.hatena.ne.jp/hotentry/{text}.rss")
-        template_message = generate_carousel(rss)
+        carousel_template = generate_carousel(rss)
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
