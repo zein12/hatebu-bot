@@ -103,39 +103,45 @@ def handle_text_message(event):
             alt_text='Buttons alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
 
+
 def make_carousel(url):
     rss = feedparser.parse(url)
     carousel_template = CarouselTemplate(columns=[
-        CarouselColumn(text=rss.entries[0].summary[:60],
-                       thumbnailImageUrl=BeautifulSoup(
-                       rss.entries[0].content[0]["value"], "html.parser").find("img")["src"],
-                       title=rss.entries[0].title[:40],
-                       actions=[URITemplateAction(label='Go to this page',
-                                                  uri=rss.entries[0].link)]),
-        CarouselColumn(text=rss.entries[1].summary[:60],
-                       thumbnailImageUrl=BeautifulSoup(
-                       rss.entries[1].content[0]["value"], "html.parser").find("img")["src"],
-                       title=rss.entries[1].title[:40],
-                       actions=[URITemplateAction(label='Go to this page',
-                                                  uri=rss.entries[1].link)]),
-        CarouselColumn(text=rss.entries[2].summary[:60],
-                       thumbnailImageUrl=BeautifulSoup(
-                       rss.entries[2].content[0]["value"], "html.parser").find("img")["src"],
-                       title=rss.entries[2].title[:40],
-                       actions=[URITemplateAction(label='Go to this page',
-                                                  uri=rss.entries[2].link)]),
-        CarouselColumn(text=rss.entries[3].summary[:60],
-                       thumbnailImageUrl=BeautifulSoup(
-                       rss.entries[3].content[0]["value"], "html.parser").find("img")["src"],
-                       title=rss.entries[3].title[:40],
-                       actions=[URITemplateAction(label='Go to this page',
-                                                  uri=rss.entries[3].link)]),
-        CarouselColumn(text=rss.entries[4].summary[:60],
-                       thumbnailImageUrl=BeautifulSoup(
-                       rss.entries[4].content[0]["value"], "html.parser").find("img")["src"],
-                       title=rss.entries[4].title[:40],
-                       actions=[URITemplateAction(label='Go to this page',
-                                                  uri=rss.entries[4].link)]),
+        CarouselColumn(
+            thumbnailImageUrl=BeautifulSoup(
+                rss.entries[0].content[0]["value"], "html.parser").find("img")["src"],
+            text=rss.entries[0].summary[:60],
+            title=rss.entries[0].title[:40],
+            actions=[URITemplateAction(label='Go to this page',
+                                       uri=rss.entries[0].link)]),
+        CarouselColumn(
+            thumbnailImageUrl=BeautifulSoup(
+                rss.entries[1].content[0]["value"], "html.parser").find("img")["src"],
+            text=rss.entries[1].summary[:60],
+            title=rss.entries[1].title[:40],
+            actions=[URITemplateAction(label='Go to this page',
+                                       uri=rss.entries[1].link)]),
+        CarouselColumn(
+            thumbnailImageUrl=BeautifulSoup(
+                rss.entries[2].content[0]["value"], "html.parser").find("img")["src"],
+            text=rss.entries[2].summary[:60],
+            title=rss.entries[2].title[:40],
+            actions=[URITemplateAction(label='Go to this page',
+                                       uri=rss.entries[2].link)]),
+        CarouselColumn(
+            thumbnailImageUrl=BeautifulSoup(
+                rss.entries[3].content[0]["value"], "html.parser").find("img")["src"],
+            text=rss.entries[3].summary[:60],
+            title=rss.entries[3].title[:40],
+            actions=[URITemplateAction(label='Go to this page',
+                                       uri=rss.entries[3].link)]),
+        CarouselColumn(
+            thumbnailImageUrl=BeautifulSoup(
+                rss.entries[4].content[0]["value"], "html.parser").find("img")["src"],
+            text=rss.entries[4].summary[:60],
+            title=rss.entries[4].title[:40],
+            actions=[URITemplateAction(label='Go to this page',
+                                       uri=rss.entries[4].link)]),
 
     ])
     return carousel_template
