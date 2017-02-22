@@ -97,9 +97,11 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
 
     else:
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.message.text))
-
+        url = f"http://b.hatena.ne.jp/search/tag?q={text}&mode=rss"
+        carousel_template = make_carousel(url)
+        template_message = TemplateSendMessage(
+            alt_text='Buttons alt text', template=carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
 
 def make_carousel(url):
     rss = feedparser.parse(url)
