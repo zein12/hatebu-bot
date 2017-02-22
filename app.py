@@ -98,6 +98,8 @@ def handle_text_message(event):
 
 
 def generate_carousel(rss):
+    print("generate_carousel called")
+    print(rss)
     carousel_template = CarouselTemplate(columns=[
         CarouselColumn(text=rss.entries[0].link,
                        title=rss.entries[0].title,
@@ -120,6 +122,7 @@ def generate_carousel(rss):
                        actions=[URITemplateAction(label='Go to this page',
                                                   uri=rss.entries[4].link)]),
         ])
+    print(carousel_template)
     return carousel_template
 
 
