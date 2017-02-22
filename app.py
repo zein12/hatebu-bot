@@ -85,12 +85,12 @@ def handle_text_message(event):
         rss = feedparser.parse("http://b.hatena.ne.jp/hotentry?mode=rss&of=5")
         carousel_template = CarouselTemplate(columns=[
 
-            CarouselColumn(text='rss.entries[0].title', title='rss.entries[0].link', actions=[
+            CarouselColumn(text=rss.entries[0].title, title=rss.entries[0].link, actions=[
                 URITemplateAction(label='Go to this page',
-                                  uri='rss.entries[0].link')]),
-            CarouselColumn(text='rss.entries[1].title', title='rss.entries[1].link', actions=[
+                                  uri=rss.entries[0].link)]),
+            CarouselColumn(text=rss.entries[1].title, title=rss.entries[1].link, actions=[
                 URITemplateAction(label='Go to this page',
-                                  uri='rss.entries[1].link')]),
+                                  uri=rss.entries[1].link)]),
         ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=carousel_template)
