@@ -90,10 +90,7 @@ def handle_text_message(event):
             CarouselColumn(text=rss.entries[1].link, title=rss.entries[1].title, actions=[
                 URITemplateAction(label='Go to this page',
                                   uri=rss.entries[1].link)]),
-            CarouselColumn(text=rss.entries[2].link, title=rss.entries[2].title, actions=[
-                URITemplateAction(label='Go to this page',
-                                  uri=rss.entries[2].link)]),
-
+        
         ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=carousel_template)
