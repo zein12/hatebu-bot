@@ -90,7 +90,12 @@ def handle_text_message(event):
 
     elif text in ["social", "economics", "life", "knowledge",
                   "it", "fun", "entertainment", "game"]:
-        pass
+        url = f"http://b.hatena.ne.jp/hotentry/{text}.rss"
+        carousel_template = make_carousel(url)
+        template_message = TemplateSendMessage(
+            alt_text='Buttons alt text', template=carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
@@ -100,7 +105,7 @@ def make_carousel(url):
     rss = feedparser.parse(url)
     carousel_template = CarouselTemplate(columns=[
         CarouselColumn(text=rss.entries[0].summary[:60],
-                       title=rss.entries[0].title[40],
+                       title=rss.entries[0].title[:40],
                        actions=[URITemplateAction(label='Go to this page',
                                                   uri=rss.entries[0].link)]),
         CarouselColumn(text=rss.entries[1].summary[:60],
