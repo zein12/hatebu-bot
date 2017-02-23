@@ -86,7 +86,7 @@ def handle_text_message(event):
         url = "http://b.hatena.ne.jp/hotentry?mode=rss"
         carousel_template = make_carousel(url)
         template_message = TemplateSendMessage(
-            alt_text='Buttons alt text', template=carousel_template)
+            alt_text='人気エントリ', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
 
     elif text in ["social", "economics", "life", "knowledge",
@@ -94,7 +94,7 @@ def handle_text_message(event):
         url = f"http://b.hatena.ne.jp/hotentry/{text}.rss"
         carousel_template = make_carousel(url)
         template_message = TemplateSendMessage(
-            alt_text='Buttons alt text', template=carousel_template)
+            alt_text='人気エントリ', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
 
     else:
@@ -102,7 +102,7 @@ def handle_text_message(event):
         url = f"http://b.hatena.ne.jp/search/tag?q={text}&mode=rss"
         carousel_template = make_carousel(url)
         template_message = TemplateSendMessage(
-            alt_text='Buttons alt text', template=carousel_template)
+            alt_text='人気エントリ', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
 
 
@@ -111,35 +111,45 @@ def make_carousel(url):
     carousel_template = CarouselTemplate(columns=[
         CarouselColumn(
             thumbnailImageUrl=BeautifulSoup(
-                rss.entries[0].content[0]["value"], "html.parser").find("img")["src"],
+                rss.entries[0].content[0]["value"], "html.parser")
+                .find("img")["src"]
+                .replace("http", "https"),
             text=rss.entries[0].summary[:60],
             title=rss.entries[0].title[:40],
             actions=[URITemplateAction(label='Go to this page',
                                        uri=rss.entries[0].link)]),
         CarouselColumn(
             thumbnailImageUrl=BeautifulSoup(
-                rss.entries[1].content[0]["value"], "html.parser").find("img")["src"],
+                rss.entries[1].content[0]["value"], "html.parser")
+                .find("img")["src"]
+                .replace("http", "https"),
             text=rss.entries[1].summary[:60],
             title=rss.entries[1].title[:40],
             actions=[URITemplateAction(label='Go to this page',
                                        uri=rss.entries[1].link)]),
         CarouselColumn(
             thumbnailImageUrl=BeautifulSoup(
-                rss.entries[2].content[0]["value"], "html.parser").find("img")["src"],
+                rss.entries[2].content[0]["value"], "html.parser")
+                .find("img")["src"]
+                .replace("http", "https"),
             text=rss.entries[2].summary[:60],
             title=rss.entries[2].title[:40],
             actions=[URITemplateAction(label='Go to this page',
                                        uri=rss.entries[2].link)]),
         CarouselColumn(
             thumbnailImageUrl=BeautifulSoup(
-                rss.entries[3].content[0]["value"], "html.parser").find("img")["src"],
+                rss.entries[3].content[0]["value"], "html.parser")
+                .find("img")["src"]
+                .replace("http", "https"),
             text=rss.entries[3].summary[:60],
             title=rss.entries[3].title[:40],
             actions=[URITemplateAction(label='Go to this page',
                                        uri=rss.entries[3].link)]),
         CarouselColumn(
             thumbnailImageUrl=BeautifulSoup(
-                rss.entries[4].content[0]["value"], "html.parser").find("img")["src"],
+                rss.entries[4].content[0]["value"], "html.parser")
+                .find("img")["src"]
+                .replace("http", "https"),
             text=rss.entries[4].summary[:60],
             title=rss.entries[4].title[:40],
             actions=[URITemplateAction(label='Go to this page',
