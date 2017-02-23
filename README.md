@@ -12,7 +12,7 @@ $ export LINE_CHANNEL_ACCESS_TOKEN=YOUR_LINE_CHANNEL_ACCESS_TOKEN
 $ pip install -r requirements.txt
 ```
 
-## Useage
+## Usage
 
 ### All popular entries
 To see all category, sent "all"
