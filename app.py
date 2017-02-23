@@ -114,7 +114,7 @@ def make_carousel(url):
         CarouselColumn(
             thumbnail_image_url=BeautifulSoup(
                 rss.entries[0].content[0]["value"], "html.parser")
-            .find("img")["src"].replace("http", "https")
+            .find("img")["src"].replace("http", "https"),
             text=rss.entries[0].summary[:60],
             title=rss.entries[0].title[:40],
             actions=[
