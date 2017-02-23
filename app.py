@@ -17,6 +17,7 @@ from __future__ import unicode_literals
 import os
 import sys
 import feedparser
+import requests
 from urllib.parse import quote
 from argparse import ArgumentParser
 
@@ -108,7 +109,7 @@ def handle_text_message(event):
 
 def make_carousel(url):
     rss = feedparser.parse(url)
-    bookmark_number_api = "http://api.b.st-hatena.com/entry.count?url="
+    bookmark_num_url = "http://api.b.st-hatena.com/entry.count?url="
     carousel_template = CarouselTemplate(columns=[
         CarouselColumn(
             thumbnailImageUrl=BeautifulSoup(
@@ -122,8 +123,10 @@ def make_carousel(url):
                     label='Go to this page',
                     uri=rss.entries[0].link),
                 URITemplateAction(
-                    label=bookmark_number_api + rss.entries[0].link,
-                    uri="http://b.hatena.ne.jp/entry" + rss.entries[0].link,
+                    label=requests.get(
+                        bookmark_number_api
+                        + rss.entries[0].link).get + "bookmarks",
+                    uri="http://b.hatena.ne.jp/entry/" + rss.entries[0].link.,
                 )]),
 
 
