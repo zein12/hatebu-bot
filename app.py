@@ -114,7 +114,7 @@ def make_carousel(url):
         CarouselColumn(
             thumbnail_image_url=BeautifulSoup(
                 rss.entries[0].content[0]["value"], "html.parser")
-            .find("img")["src"].replace("http", "https"),
+            .find_all("img")[1]["src"].replace("http", "https"),
             text=rss.entries[0].summary[:60],
             title=rss.entries[0].title[:40],
             actions=[
@@ -130,7 +130,7 @@ def make_carousel(url):
         CarouselColumn(
             thumbnail_image_url=BeautifulSoup(
                 rss.entries[1].content[0]["value"], "html.parser")
-            .find("img")["src"].replace("http", "https"),
+            .find_all("img")[1]["src"].replace("http", "https"),
             text=rss.entries[1].summary[:60],
             title=rss.entries[1].title[:40],
             actions=[
@@ -146,7 +146,7 @@ def make_carousel(url):
         CarouselColumn(
             thumbnail_image_url=BeautifulSoup(
                 rss.entries[2].content[0]["value"], "html.parser")
-            .find("img")["src"].replace("http", "https"),
+            .find_all("img")[1]["src"].replace("http", "https"),
             text=rss.entries[2].summary[:60],
             title=rss.entries[2].title[:40],
             actions=[
@@ -162,7 +162,7 @@ def make_carousel(url):
         CarouselColumn(
             thumbnail_image_url=BeautifulSoup(
                 rss.entries[3].content[0]["value"], "html.parser")
-            .find("img")["src"].replace("http", "https"),
+            .find_all("img")[1]["src"].replace("http", "https"),
             text=rss.entries[3].summary[:60],
             title=rss.entries[3].title[:40],
             actions=[
@@ -178,7 +178,7 @@ def make_carousel(url):
         CarouselColumn(
             thumbnail_image_url=BeautifulSoup(
                 rss.entries[4].content[0]["value"], "html.parser")
-            .find("img")["src"].replace("http", "https"),
+            .find_all("img")[1]["src"].replace("http", "https"),
             text=rss.entries[4].summary[:60],
             title=rss.entries[4].title[:40],
             actions=[
