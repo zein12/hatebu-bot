@@ -124,7 +124,7 @@ def make_carousel(url):
                     uri=rss.entries[0].link),
                 URITemplateAction(
                     label=requests.get(
-                        bookmark_number_api
+                        bookmark_num_url
                         + rss.entries[0].link).get + "bookmarks",
                     uri="http://b.hatena.ne.jp/entry/" + rss.entries[0].link,
                 )]),
