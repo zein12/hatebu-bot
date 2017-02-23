@@ -125,13 +125,13 @@ def make_carousel(url):
                 URITemplateAction(
                     label=requests.get(
                         bookmark_num_url
-                        + rss.entries[0].link).text + "bookmarks",
+                        + rss.entries[0].link).text + " bookmarks",
                     uri="http://b.hatena.ne.jp/entry/" + rss.entries[0].link,
                 )]),
 
 
     ])
-    print(carousel_template)
+    print(BeautifulSoup(rss.entries[0].content[0]["value"], "html.parser").find("img")["src"].replace("http", "https"))
     return carousel_template
 
 
