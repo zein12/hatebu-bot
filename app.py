@@ -112,7 +112,7 @@ def make_carousel(url):
     bookmark_num_url = "http://api.b.st-hatena.com/entry.count?url="
     carousel_template = CarouselTemplate(columns=[
         CarouselColumn(
-            thumbnailImageUrl="https://s3-us-west-2.amazonaws.com/lineapitest/hamburger_240.jpeg"
+            thumbnailImageUrl="https://s3-us-west-2.amazonaws.com/lineapitest/hamburger_240.jpeg",
             text=rss.entries[0].summary[:60],
             title=rss.entries[0].title[:40],
             actions=[
