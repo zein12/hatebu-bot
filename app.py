@@ -127,10 +127,73 @@ def make_carousel(url):
                         + rss.entries[0].link).text + " bookmarks",
                     uri="http://b.hatena.ne.jp/entry/" + rss.entries[0].link,
                 )]),
+        CarouselColumn(
+            thumbnail_image_url=BeautifulSoup(
+                rss.entries[1].content[0]["value"], "html.parser")
+            .find("img")["src"].replace("http", "https"),
+            text=rss.entries[1].summary[:60],
+            title=rss.entries[1].title[:40],
+            actions=[
+                URITemplateAction(
+                    label='Go to this page',
+                    uri=rss.entries[1].link),
+                URITemplateAction(
+                    label=requests.get(
+                        bookmark_num_url
+                        + rss.entries[1].link).text + " bookmarks",
+                    uri="http://b.hatena.ne.jp/entry/" + rss.entries[1].link,
+                )]),
+        CarouselColumn(
+            thumbnail_image_url=BeautifulSoup(
+                rss.entries[2].content[0]["value"], "html.parser")
+            .find("img")["src"].replace("http", "https"),
+            text=rss.entries[2].summary[:60],
+            title=rss.entries[2].title[:40],
+            actions=[
+                URITemplateAction(
+                    label='Go to this page',
+                    uri=rss.entries[2].link),
+                URITemplateAction(
+                    label=requests.get(
+                        bookmark_num_url
+                        + rss.entries[2].link).text + " bookmarks",
+                    uri="http://b.hatena.ne.jp/entry/" + rss.entries[2].link,
+                )]),
+        CarouselColumn(
+            thumbnail_image_url=BeautifulSoup(
+                rss.entries[3].content[3]["value"], "html.parser")
+            .find("img")["src"].replace("http", "https"),
+            text=rss.entries[3].summary[:60],
+            title=rss.entries[3].title[:40],
+            actions=[
+                URITemplateAction(
+                    label='Go to this page',
+                    uri=rss.entries[3].link),
+                URITemplateAction(
+                    label=requests.get(
+                        bookmark_num_url
+                        + rss.entries[3].link).text + " bookmarks",
+                    uri="http://b.hatena.ne.jp/entry/" + rss.entries[3].link,
+                )]),
+        CarouselColumn(
+            thumbnail_image_url=BeautifulSoup(
+                rss.entries[4].content[0]["value"], "html.parser")
+            .find("img")["src"].replace("http", "https"),
+            text=rss.entries[4].summary[:60],
+            title=rss.entries[4].title[:40],
+            actions=[
+                URITemplateAction(
+                    label='Go to this page',
+                    uri=rss.entries[4].link),
+                URITemplateAction(
+                    label=requests.get(
+                        bookmark_num_url
+                        + rss.entries[4].link).text + " bookmarks",
+                    uri="http://b.hatena.ne.jp/entry/" + rss.entries[4].link,
+                )]),
 
 
     ])
-    print(carousel_template)
     return carousel_template
 
 
