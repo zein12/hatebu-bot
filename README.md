@@ -31,4 +31,4 @@ To see by category sent text as follows
 
 ### Search by keywords
 
-If you sent text expect for above, you can search by using that word.
+In case you sent the text except for above, you can search hot entries by using that word.
